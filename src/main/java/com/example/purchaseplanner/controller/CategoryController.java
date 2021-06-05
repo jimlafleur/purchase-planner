@@ -1,8 +1,7 @@
 package com.example.purchaseplanner.controller;
 
-import com.example.purchaseplanner.entity.Purchase;
+import com.example.purchaseplanner.entity.Category;
 import com.example.purchaseplanner.repository.CategoryRepository;
-import com.example.purchaseplanner.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,30 +10,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class PurchaseController {
-
-    @Autowired
-    PurchaseRepository purchaseRepository;
+public class CategoryController {
     @Autowired
     CategoryRepository categoryRepository;
 
-    @GetMapping("/purchases")
+    @GetMapping("/categories")
     public String getAllPurchases(Model model) {
-        model.addAttribute("purchases", purchaseRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());
-        return "purchases";
+        return "categories";
     }
 
-    @PostMapping("/purchases")
+    @PostMapping("/categories")
     public String addMessage(@RequestParam String name,
-                             @RequestParam int count,
-                             @RequestParam double coast,
+                             @RequestParam String description,
                              Model model) {
-        Purchase message = new Purchase(name, count, coast);
+        Category category = new Category(name, description);
 
-        purchaseRepository.save(message);
-        model.addAttribute("purchases", purchaseRepository.findAll());
-        return "purchases";
+        categoryRepository.save(category);
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "categories";
     }
-
 }

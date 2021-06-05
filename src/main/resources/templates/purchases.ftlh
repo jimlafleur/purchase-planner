@@ -6,6 +6,12 @@
             <input type="text" name="name" placeholder="Название"/>
             <input type="text" name="count" placeholder="Количество"/>
             <input type="text" name="coast" placeholder="Стоимость"/>
+            <select class="custom-select col-md-2" id="inputGroupSelect06">
+                <#list categories! as category>
+                    <option value="${category.id}">${category.name}</option>
+                </#list>
+            </select>
+
             <button type="submit">Добавить покупку</button>
         </form>
     </div>
@@ -18,6 +24,6 @@
             <span>${(purchase.date?date)!}</span>
         </div>
     <#else>
-        No messages
+        Покупок нет
     </#list>
 </@c.page>
