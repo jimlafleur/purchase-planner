@@ -1,5 +1,6 @@
 package com.example.purchaseplanner.controller;
 
+import com.example.purchaseplanner.entity.Category;
 import com.example.purchaseplanner.entity.Purchase;
 import com.example.purchaseplanner.repository.CategoryRepository;
 import com.example.purchaseplanner.repository.PurchaseRepository;
@@ -29,10 +30,10 @@ public class PurchaseController {
     public String addMessage(@RequestParam String name,
                              @RequestParam int count,
                              @RequestParam double coast,
+                             @RequestParam("categoryId") Category category,
                              Model model) {
-        Purchase message = new Purchase(name, count, coast);
-
-        purchaseRepository.save(message);
+        Purchase purchase = new Purchase(name, count, coast, category);
+        purchaseRepository.save(purchase);
         model.addAttribute("purchases", purchaseRepository.findAll());
         return "purchases";
     }

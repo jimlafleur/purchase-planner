@@ -6,7 +6,7 @@
             <input type="text" name="name" placeholder="Название"/>
             <input type="text" name="count" placeholder="Количество"/>
             <input type="text" name="coast" placeholder="Стоимость"/>
-            <select class="custom-select col-md-2" id="inputGroupSelect06">
+            <select id="select" name="categoryId">
                 <#list categories! as category>
                     <option value="${category.id}">${category.name}</option>
                 </#list>
@@ -21,6 +21,7 @@
             <span>${purchase.name}</span>
             <span>${purchase.count}</span>
             <span>${purchase.coast}</span>
+            <span>${(purchase.category.name)!}</span>
             <span>${(purchase.date?date)!}</span>
         </div>
     <#else>
