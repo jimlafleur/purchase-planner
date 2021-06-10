@@ -2,32 +2,42 @@ package com.example.purchaseplanner.controller;
 
 import com.example.purchaseplanner.entity.Category;
 import com.example.purchaseplanner.repository.CategoryRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("categories")
 public class CategoryController {
     @Autowired
     CategoryRepository categoryRepository;
 
-    @GetMapping("/categories")
-    public String getAllPurchases(Model model) {
-        model.addAttribute("categories", categoryRepository.findAll());
-        return "categories";
+    @GetMapping
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
     }
 
-    @PostMapping("/categories")
-    public String addMessage(@RequestParam String name,
-                             @RequestParam String description,
-                             Model model) {
-        Category category = new Category(name, description);
+    @GetMapping("{id}")
+    public Category getCategoryById(@PathVariable("id") Category category) {
+        return category;
+    }
 
-        categoryRepository.save(category);
-        model.addAttribute("categories", categoryRepository.findAll());
-        return "categories";
+    @PostMapping
+    public Category addCategory(@RequestBody Category category) {
+        return categoryRepository.save(category);
+    }
+
+    @PutMapping("{id}")
+    public Category editCategory(@PathVariable("id") Category categoryFromDb,
+                                 @RequestBody Category category) {
+        BeanUtils.copyProperties(category, categoryFromDb, "id");
+        return categoryRepository.save(categoryFromDb);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteList(@PathVariable("id") Category category) {
+        categoryRepository.delete(category);
     }
 }

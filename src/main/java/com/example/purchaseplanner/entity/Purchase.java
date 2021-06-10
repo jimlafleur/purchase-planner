@@ -1,6 +1,5 @@
 package com.example.purchaseplanner.entity;
 
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,6 +15,11 @@ public class Purchase {
     private double coast;
     private Date date;
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "shopping_list_id")
+    private ShoppingList shoppingList;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
@@ -30,6 +34,7 @@ public class Purchase {
         this.date = new Date();
         this.category = category;
     }
+
     public Purchase(String name, int count, double coast) {
         this.name = name;
         this.count = count;

@@ -2,40 +2,49 @@ package com.example.purchaseplanner.controller;
 
 import com.example.purchaseplanner.entity.Category;
 import com.example.purchaseplanner.entity.Purchase;
-import com.example.purchaseplanner.repository.CategoryRepository;
 import com.example.purchaseplanner.repository.PurchaseRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/purchases")
 public class PurchaseController {
 
     @Autowired
     PurchaseRepository purchaseRepository;
-    @Autowired
-    CategoryRepository categoryRepository;
 
-    @GetMapping("/purchases")
-    public String getAllPurchases(Model model) {
-        model.addAttribute("purchases", purchaseRepository.findAll());
-        model.addAttribute("categories", categoryRepository.findAll());
-        return "purchases";
+    @GetMapping
+    public List<Purchase> getAllPurchases() {
+        return purchaseRepository.findAll();
     }
 
-    @PostMapping("/purchases")
-    public String addMessage(@RequestParam String name,
-                             @RequestParam int count,
-                             @RequestParam double coast,
-                             @RequestParam("categoryId") Category category,
-                             Model model) {
-        Purchase purchase = new Purchase(name, count, coast, category);
-        purchaseRepository.save(purchase);
-        model.addAttribute("purchases", purchaseRepository.findAll());
-        return "purchases";
+    @PostMapping
+    public Purchase addPurchase(@RequestBody Purchase purchase, @RequestParam("categoryId") Category category) {
+        return purchaseRepository.save(purchase);
+    }
+
+    @GetMapping("{id}")
+    public Purchase getPurchaseById(@PathVariable("id") Purchase purchase) {
+        return purchase;
+    }
+
+    @PutMapping("{id}")
+    public Purchase editPurchase(@PathVariable("id") Purchase purchaseFromDb,
+                                 @RequestBody Purchase purchase,
+                                 @RequestParam("categoryId") Category category) {
+        purchaseFromDb.setName(purchase.getName());
+        purchaseFromDb.setCount(purchase.getCount());
+        purchaseFromDb.setCoast(purchase.getCoast());
+        purchaseFromDb.setCategory(category);
+        return purchaseRepository.save(purchaseFromDb);
+    }
+
+    @DeleteMapping("{id}")
+    public void deletePurchase(@PathVariable("id") Purchase purchase) {
+        purchaseRepository.delete(purchase);
     }
 
 }

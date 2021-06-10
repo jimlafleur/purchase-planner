@@ -1,9 +1,9 @@
 package com.example.purchaseplanner.repository;
 
 import com.example.purchaseplanner.entity.Purchase;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface PurchaseRepository extends CrudRepository<Purchase, Integer> {
+public interface PurchaseRepository extends JpaRepository<Purchase, Integer> {
 
 }
