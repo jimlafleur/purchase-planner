@@ -16,30 +16,15 @@ public class Purchase {
     private Date date;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "shopping_list_id")
     private ShoppingList shoppingList;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
     public Purchase() {
-    }
-
-    public Purchase(String name, int count, double coast, Category category) {
-        this.name = name;
-        this.count = count;
-        this.coast = coast;
-        this.date = new Date();
-        this.category = category;
-    }
-
-    public Purchase(String name, int count, double coast) {
-        this.name = name;
-        this.count = count;
-        this.coast = coast;
-        this.date = new Date();
     }
 
     public int getId() {
@@ -84,5 +69,9 @@ public class Purchase {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public void setShoppingList(ShoppingList shoppingList) {
+        this.shoppingList = shoppingList;
     }
 }
