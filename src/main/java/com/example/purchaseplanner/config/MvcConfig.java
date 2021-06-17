@@ -12,6 +12,6 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedMethods("GET", "PUT", "POST", "DELETE")
                 .allowedHeaders("*")
-                .allowedOrigins("http://localhost:3000/");
+                .allowedOrigins("http://localhost:3000/", "https://purchase-planner-ui.herokuapp.com/");
     }
 }
