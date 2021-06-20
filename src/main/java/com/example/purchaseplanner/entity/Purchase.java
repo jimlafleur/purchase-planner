@@ -16,7 +16,7 @@ public class Purchase {
     private Date date;
 
 
-    @ManyToOne( cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "shopping_list_id")
     private ShoppingList shoppingList;
 
