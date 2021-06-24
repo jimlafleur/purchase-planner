@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "shopping_list")
+@Table(name = "shopping_lists")
 public class ShoppingList {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

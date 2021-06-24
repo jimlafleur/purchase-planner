@@ -1,5 +1,7 @@
 package com.example.purchaseplanner.controller;
 
+import com.example.purchaseplanner.converter.ShoppingListConverter;
+import com.example.purchaseplanner.dto.ShoppingListDto;
 import com.example.purchaseplanner.entity.ShoppingList;
 import com.example.purchaseplanner.repository.ShoppingListRepository;
 import org.springframework.beans.BeanUtils;
@@ -7,21 +9,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("lists")
 public class ShoppingListController {
     @Autowired
     ShoppingListRepository shoppingListRepository;
+    @Autowired
+    ShoppingListConverter shoppingListConverter;
 
     @GetMapping
-    public List<ShoppingList> getAllLists() {
-        return shoppingListRepository.findAll();
+    public List<ShoppingListDto> getAllLists() {
+        return shoppingListRepository
+                .findAll()
+                .stream()
+                .map(shoppingListConverter::convert)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("{id}")
-    public ShoppingList getListById(@PathVariable("id") ShoppingList shoppingList) {
-        return shoppingList;
+    public ShoppingListDto getListById(@PathVariable("id") ShoppingList shoppingList) {
+        return shoppingListConverter.convert(shoppingList);
     }
 
     @PostMapping

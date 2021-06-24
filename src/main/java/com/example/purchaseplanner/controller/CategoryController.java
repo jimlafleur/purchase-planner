@@ -37,7 +37,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("{id}")
-    public void deleteList(@PathVariable("id") Category category) {
+    public void deleteCategory(@PathVariable("id") Category category) {
         categoryRepository.delete(category);
     }
 }

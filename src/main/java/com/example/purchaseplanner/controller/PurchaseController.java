@@ -1,6 +1,8 @@
 package com.example.purchaseplanner.controller;
 
-import com.example.purchaseplanner.entity.Category;
+import com.example.purchaseplanner.converter.PurchaseConverter;
+import com.example.purchaseplanner.dto.PurchaseDto;
+import com.example.purchaseplanner.entity.Product;
 import com.example.purchaseplanner.entity.Purchase;
 import com.example.purchaseplanner.entity.ShoppingList;
 import com.example.purchaseplanner.repository.PurchaseRepository;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("purchases")
@@ -15,10 +18,16 @@ public class PurchaseController {
 
     @Autowired
     PurchaseRepository purchaseRepository;
+    @Autowired
+    PurchaseConverter purchaseConverter;
 
     @GetMapping
-    public List<Purchase> getAllPurchases() {
-        return purchaseRepository.findAll();
+    public List<PurchaseDto> getAllPurchases() {
+        return purchaseRepository
+                .findAll()
+                .stream()
+                .map(purchaseConverter::convert)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("{id}")
@@ -27,22 +36,19 @@ public class PurchaseController {
     }
 
     @PostMapping
-    public Purchase addPurchase(@RequestParam("categoryId") Category category,
-                                @RequestParam("listId") ShoppingList list,
+    public Purchase addPurchase(@RequestParam("listId") ShoppingList list,
+                                @RequestParam("productId") Product product,
                                 @RequestBody Purchase purchase) {
-        purchase.setCategory(category);
         purchase.setShoppingList(list);
+        purchase.setProduct(product);
         return purchaseRepository.save(purchase);
     }
 
     @PutMapping("{id}")
     public Purchase editPurchase(@PathVariable("id") Purchase purchaseFromDb,
-                                 @RequestBody Purchase purchase,
-                                 @RequestParam("categoryId") Category category) {
-        purchaseFromDb.setName(purchase.getName());
+                                 @RequestBody Purchase purchase) {
         purchaseFromDb.setCount(purchase.getCount());
         purchaseFromDb.setCoast(purchase.getCoast());
-        purchaseFromDb.setCategory(category);
         return purchaseRepository.save(purchaseFromDb);
     }
 

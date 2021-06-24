@@ -3,22 +3,20 @@ package com.example.purchaseplanner.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name = "products")
 
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String name;
-    private String description;
 
-    public Category() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    public Category(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public Product() {
     }
 
     public int getId() {
@@ -33,11 +31,11 @@ public class Category {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
