@@ -1,11 +1,10 @@
 package com.example.purchaseplanner.dto;
 
 public class ProductDto {
+
     private String name;
-    private int count;
-    private double coast;
-    private int productId;
-    private int purchaseId;
+    private String categoryName;
+    private int categoryId;
 
     public String getName() {
         return name;
@@ -15,35 +14,19 @@ public class ProductDto {
         this.name = name;
     }
 
-    public int getCount() {
-        return count;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public double getCoast() {
-        return coast;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCoast(double coast) {
-        this.coast = coast;
-    }
-
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public int getPurchaseId() {
-        return purchaseId;
-    }
-
-    public void setPurchaseId(int purchaseId) {
-        this.purchaseId = purchaseId;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }

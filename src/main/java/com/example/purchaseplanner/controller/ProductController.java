@@ -1,15 +1,16 @@
 package com.example.purchaseplanner.controller;
 
+import com.example.purchaseplanner.converter.ProductConverter;
 import com.example.purchaseplanner.dto.ProductDto;
+import com.example.purchaseplanner.entity.Category;
 import com.example.purchaseplanner.entity.Product;
-import com.example.purchaseplanner.entity.ShoppingList;
 import com.example.purchaseplanner.repository.ProductRepository;
-import com.example.purchaseplanner.service.ProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("products")
@@ -18,12 +19,15 @@ public class ProductController {
     ProductRepository productRepository;
 
     @Autowired
-    ProductService productService;
+    ProductConverter productConverter;
 
     @GetMapping
-    public List<ProductDto> getAllProducts(@RequestParam("listId") ShoppingList list) {
-//        return productRepository.findAll();
-        return productService.getProducts(list);
+    public List<ProductDto> getAllProducts() {
+        return productRepository
+                .findAll()
+                .stream()
+                .map(productConverter::convert)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("{id}")
@@ -32,7 +36,9 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product addProduct(@RequestBody Product product) {
+    public Product addProduct(@RequestBody Product product,
+                              @RequestParam("categoryId") Category category) {
+        product.setCategory(category);
         return productRepository.save(product);
     }
 

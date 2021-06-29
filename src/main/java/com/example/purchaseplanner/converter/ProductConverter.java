@@ -9,9 +9,8 @@ public class ProductConverter {
     public ProductDto convert(Product product) {
         ProductDto dto = new ProductDto();
         dto.setName(product.getName());
-        dto.setCoast(0);
-        dto.setCount(0);
-        dto.setProductId(product.getId());
+        dto.setCategoryName(product.getCategory().getName());
+        dto.setCategoryId(product.getCategory().getId());
 
         return dto;
     }

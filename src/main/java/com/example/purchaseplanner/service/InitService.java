@@ -16,7 +16,6 @@ import java.util.stream.Stream;
 
 @Service
 public class InitService {
-//    private static final String defaultProductsFileName = "defaultProducts.txt";
 
     @Autowired
     CategoryRepository categoryRepository;
