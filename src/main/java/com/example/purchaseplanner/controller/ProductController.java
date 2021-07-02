@@ -5,8 +5,8 @@ import com.example.purchaseplanner.dto.ProductDto;
 import com.example.purchaseplanner.entity.Category;
 import com.example.purchaseplanner.entity.Product;
 import com.example.purchaseplanner.repository.ProductRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,12 +14,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("products")
+@AllArgsConstructor
 public class ProductController {
-    @Autowired
-    ProductRepository productRepository;
-
-    @Autowired
-    ProductConverter productConverter;
+    private final ProductRepository productRepository;
+    private final ProductConverter productConverter;
 
     @GetMapping
     public List<ProductDto> getAllProducts() {

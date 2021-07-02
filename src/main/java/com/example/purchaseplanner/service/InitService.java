@@ -4,7 +4,7 @@ import com.example.purchaseplanner.entity.Category;
 import com.example.purchaseplanner.entity.Product;
 import com.example.purchaseplanner.repository.CategoryRepository;
 import com.example.purchaseplanner.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -15,12 +15,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
+@AllArgsConstructor
 public class InitService {
 
-    @Autowired
-    CategoryRepository categoryRepository;
-    @Autowired
-    ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
     public void initProducts() {
         try (Stream<String> stream = Files.lines(Paths.get("src\\main\\resources\\defaultProducts.txt"))) {

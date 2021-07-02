@@ -7,11 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductConverter {
     public ProductDto convert(Product product) {
-        ProductDto dto = new ProductDto();
-        dto.setName(product.getName());
-        dto.setCategoryName(product.getCategory().getName());
-        dto.setCategoryId(product.getCategory().getId());
-
-        return dto;
+        return ProductDto.builder()
+                .name(product.getName())
+                .categoryName(product.getCategory().getName())
+                .categoryId(product.getCategory().getId())
+                .build();
     }
 }

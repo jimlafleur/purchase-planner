@@ -1,27 +1,33 @@
 package com.example.purchaseplanner.converter;
 
+import com.example.purchaseplanner.dto.PurchaseDto;
 import com.example.purchaseplanner.dto.ShoppingListDto;
 import com.example.purchaseplanner.entity.ShoppingList;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@AllArgsConstructor
 public class ShoppingListConverter {
 
-    @Autowired
-    PurchaseConverter purchaseConverter;
+    private final PurchaseConverter purchaseConverter;
 
     public ShoppingListDto convert(final ShoppingList shoppingList) {
-        final ShoppingListDto shoppingListDto = new ShoppingListDto();
-        shoppingListDto.setId(shoppingList.getId());
-        shoppingListDto.setName(shoppingList.getName());
-        shoppingListDto.setPurchaseList(shoppingList
+        return ShoppingListDto.builder()
+                .id(shoppingList.getId())
+                .name(shoppingList.getName())
+                .purchaseList(getPurchases(shoppingList))
+                .build();
+    }
+
+    private List<PurchaseDto> getPurchases(final ShoppingList shoppingList) {
+        return shoppingList
                 .getPurchaseList()
                 .stream()
                 .map(purchaseConverter::convert)
-                .collect(Collectors.toList()));
-        return shoppingListDto;
+                .collect(Collectors.toList());
     }
 }

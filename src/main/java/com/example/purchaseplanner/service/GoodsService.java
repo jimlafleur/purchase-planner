@@ -5,20 +5,18 @@ import com.example.purchaseplanner.dto.GoodsDto;
 import com.example.purchaseplanner.entity.Purchase;
 import com.example.purchaseplanner.entity.ShoppingList;
 import com.example.purchaseplanner.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class GoodsService {
 
-    @Autowired
-    ProductRepository productRepository;
-
-    @Autowired
-    GoodsConverter goodsConverter;
+    private final ProductRepository productRepository;
+    private final GoodsConverter goodsConverter;
 
     public List<GoodsDto> getGoods(final ShoppingList list, final String nameForSearch) {
         List<GoodsDto> products = getGoods(nameForSearch);

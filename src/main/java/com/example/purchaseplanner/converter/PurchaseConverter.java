@@ -7,17 +7,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class PurchaseConverter {
     public PurchaseDto convert(final Purchase purchase) {
-        final PurchaseDto dto = new PurchaseDto();
 
-        dto.setName(purchase.getProduct().getName());
-        dto.setCoast(purchase.getCoast());
-        dto.setCount(purchase.getCount());
-        dto.setProductId(purchase.getProduct().getId());
-        dto.setPurchaseId(purchase.getId());
-        dto.setListId(purchase.getShoppingList().getId());
-        dto.setBought(purchase.isBought());
-        dto.setCategoryName(purchase.getProduct().getCategory().getName());
-
-        return dto;
+        return PurchaseDto.builder()
+                .name(purchase.getProduct().getName())
+                .coast(purchase.getCoast())
+                .count(purchase.getCount())
+                .productId(purchase.getProduct().getId())
+                .purchaseId(purchase.getId())
+                .listId(purchase.getShoppingList().getId())
+                .isBought(purchase.isBought())
+                .categoryName(purchase.getProduct().getCategory().getName())
+                .build();
     }
 }

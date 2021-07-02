@@ -2,17 +2,18 @@ package com.example.purchaseplanner.controller;
 
 import com.example.purchaseplanner.entity.Category;
 import com.example.purchaseplanner.repository.CategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("categories")
+@AllArgsConstructor
 public class CategoryController {
-    @Autowired
-    CategoryRepository categoryRepository;
+
+    private final CategoryRepository categoryRepository;
 
     @GetMapping
     public List<Category> getAllCategories() {
