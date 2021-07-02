@@ -1,9 +1,16 @@
 package com.example.purchaseplanner.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "purchases")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,50 +29,4 @@ public class Purchase {
     @JoinColumn(name = "shopping_list_id")
     private ShoppingList shoppingList;
 
-    public Purchase() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public double getCoast() {
-        return coast;
-    }
-
-    public void setCoast(double coast) {
-        this.coast = coast;
-    }
-
-    public void setShoppingList(ShoppingList shoppingList) {
-        this.shoppingList = shoppingList;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public boolean isBought() {
-        return isBought;
-    }
-
-    public void setBought(boolean bought) {
-        isBought = bought;
-    }
-
-    public ShoppingList getShoppingList() {
-        return shoppingList;
-    }
 }
