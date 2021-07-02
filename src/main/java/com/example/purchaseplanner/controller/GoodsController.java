@@ -20,7 +20,8 @@ public class GoodsController {
     GoodsService goodsService;
 
     @GetMapping
-    public List<GoodsDto> getAllProducts(@RequestParam("listId") ShoppingList list) {
-        return goodsService.getProducts(list);
+    public List<GoodsDto> getGoods(@RequestParam("listId") ShoppingList list,
+                                         @RequestParam String nameForSearch) {
+        return goodsService.getGoods(list, nameForSearch);
     }
 }
