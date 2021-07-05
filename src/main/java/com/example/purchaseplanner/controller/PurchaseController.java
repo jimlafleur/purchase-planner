@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -38,9 +39,27 @@ public class PurchaseController {
     public Purchase addPurchase(@RequestParam("listId") ShoppingList list,
                                 @RequestParam("productId") Product product,
                                 @RequestBody Purchase purchase) {
+        Optional<Purchase> optional = getPurchaseByProductName(list, product);
+        if (optional.isPresent()) {
+            final Purchase oldPurchase = optional.get();
+            oldPurchase.setCount(oldPurchase.getCount() + 1);
+            return purchaseRepository.save(oldPurchase);
+        }
         purchase.setShoppingList(list);
         purchase.setProduct(product);
         return purchaseRepository.save(purchase);
+    }
+
+    private Optional<Purchase> getPurchaseByProductName(ShoppingList list, Product product) {
+        return list.getPurchaseList()
+                .stream()
+                .filter(purchase -> checkName(purchase, product.getName()))
+                .findFirst();
+    }
+
+    private boolean checkName(Purchase purchase, String productName) {
+        String name = purchase.getProduct().getName();
+        return name != null && !name.isBlank() && name.equals(productName);
     }
 
     @PutMapping("{id}")
