@@ -2,15 +2,19 @@ package com.example.purchaseplanner.converter;
 
 import com.example.purchaseplanner.dto.ProductDto;
 import com.example.purchaseplanner.entity.Product;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductConverter {
-    public ProductDto convert(Product product) {
-        return ProductDto.builder()
-                .name(product.getName())
-                .categoryName(product.getCategory().getName())
-                .categoryId(product.getCategory().getId())
-                .build();
+@AllArgsConstructor
+public class ProductConverter implements BaseConverter<ProductDto, Product> {
+    private final CategoryConverter categoryConverter;
+
+    @Override
+    public ProductDto convert(final Product product) {
+        final ProductDto productDto = new ProductDto();
+        productDto.setName(product.getName());
+        productDto.setCategory(categoryConverter.convert(product.getCategory()));
+        return productDto;
     }
 }

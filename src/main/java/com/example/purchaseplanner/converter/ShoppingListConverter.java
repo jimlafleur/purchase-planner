@@ -11,16 +11,17 @@ import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
-public class ShoppingListConverter {
+public class ShoppingListConverter implements BaseConverter<ShoppingListDto, ShoppingList> {
 
     private final PurchaseConverter purchaseConverter;
 
+    @Override
     public ShoppingListDto convert(final ShoppingList shoppingList) {
-        return ShoppingListDto.builder()
-                .id(shoppingList.getId())
-                .name(shoppingList.getName())
-                .purchaseList(getPurchases(shoppingList))
-                .build();
+        final ShoppingListDto shoppingListDto = new ShoppingListDto();
+        shoppingListDto.setId(shoppingList.getId());
+        shoppingListDto.setName(shoppingList.getName());
+        shoppingListDto.setPurchaseList(getPurchases(shoppingList));
+        return shoppingListDto;
     }
 
     private List<PurchaseDto> getPurchases(final ShoppingList shoppingList) {

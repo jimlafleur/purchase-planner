@@ -1,16 +1,29 @@
 package com.example.purchaseplanner.dto;
 
-import lombok.Builder;
+import com.example.purchaseplanner.dto.base.BaseNamedDto;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Товар
+ */
 @Getter
 @Setter
-@Builder
-public class GoodsDto {
-    private String name;
+@NoArgsConstructor
+public class GoodsDto extends BaseNamedDto {
+    /**
+     * Количество
+     */
     private int count;
-    private double coast;
+
+    /**
+     * Идентификатор продукта
+     */
     private int productId;
+
+    /**
+     * Идентификатор покупки
+     */
     private int purchaseId;
 }

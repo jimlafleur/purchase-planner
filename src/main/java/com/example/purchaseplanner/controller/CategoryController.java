@@ -1,7 +1,10 @@
 package com.example.purchaseplanner.controller;
 
+import com.example.purchaseplanner.converter.CategoryConverter;
+import com.example.purchaseplanner.dto.CategoryDto;
 import com.example.purchaseplanner.entity.Category;
 import com.example.purchaseplanner.repository.CategoryRepository;
+import com.example.purchaseplanner.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -14,20 +17,22 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
+    private final CategoryConverter categoryConverter;
 
     @GetMapping
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+    public List<CategoryDto> getAllCategories() {
+        return categoryService.getAllCategories();
     }
 
     @GetMapping("{id}")
-    public Category getCategoryById(@PathVariable("id") Category category) {
-        return category;
+    public CategoryDto getCategoryById(@PathVariable("id") Category category) {
+        return categoryConverter.convert(category);
     }
 
     @PostMapping
-    public Category addCategory(@RequestBody Category category) {
-        return categoryRepository.save(category);
+    public Category addCategory(@RequestBody CategoryDto category) {
+        return categoryService.addCategory(category);
     }
 
     @PutMapping("{id}")

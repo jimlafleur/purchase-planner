@@ -5,17 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 /**
- * Список покупок
+ * Категория товара
  */
 @Getter
 @Setter
 @NoArgsConstructor
-public class ShoppingListDto extends BaseNamedDto {
+public class CategoryDto extends BaseNamedDto {
     /**
-     * Список покупок
+     * Описание категории
      */
-    private List<PurchaseDto> purchaseList;
+    private String description;
 }

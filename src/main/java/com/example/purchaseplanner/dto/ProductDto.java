@@ -1,16 +1,19 @@
 package com.example.purchaseplanner.dto;
 
-import lombok.Builder;
+import com.example.purchaseplanner.dto.base.BaseNamedDto;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Продукт
+ */
 @Getter
 @Setter
-@Builder
-public class ProductDto {
-
-    private String name;
-    private String categoryName;
-    private int categoryId;
-
+@NoArgsConstructor
+public class ProductDto extends BaseNamedDto {
+    /**
+     * Категория товара, к которой относится продукт
+     */
+    private CategoryDto category;
 }

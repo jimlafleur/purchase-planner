@@ -2,21 +2,24 @@ package com.example.purchaseplanner.converter;
 
 import com.example.purchaseplanner.dto.PurchaseDto;
 import com.example.purchaseplanner.entity.Purchase;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PurchaseConverter {
-    public PurchaseDto convert(final Purchase purchase) {
+@AllArgsConstructor
+public class PurchaseConverter implements BaseConverter<PurchaseDto, Purchase> {
 
-        return PurchaseDto.builder()
-                .name(purchase.getProduct().getName())
-                .coast(purchase.getCoast())
-                .count(purchase.getCount())
-                .productId(purchase.getProduct().getId())
-                .purchaseId(purchase.getId())
-                .listId(purchase.getShoppingList().getId())
-                .isBought(purchase.isBought())
-                .categoryName(purchase.getProduct().getCategory().getName())
-                .build();
+    private final ProductConverter productConverter;
+
+    @Override
+    public PurchaseDto convert(final Purchase purchase) {
+        final PurchaseDto purchaseDto = new PurchaseDto();
+        purchaseDto.setName(purchase.getProduct().getName());
+        purchaseDto.setCoast(purchase.getCoast());
+        purchaseDto.setCount(purchase.getCount());
+        purchaseDto.setId(purchase.getProduct().getId());
+        purchaseDto.setProduct(productConverter.convert(purchase.getProduct()));
+        purchaseDto.setShoppingListId(purchase.getShoppingList().getId());
+        return purchaseDto;
     }
 }

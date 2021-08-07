@@ -19,7 +19,7 @@ public class GoodsService {
     private final GoodsConverter goodsConverter;
 
     public List<GoodsDto> getGoods(final ShoppingList list, final String nameForSearch) {
-        List<GoodsDto> products = getGoods(nameForSearch);
+        final List<GoodsDto> products = getGoods(nameForSearch);
         addPurchasesParamsFromList(products, list);
         return products;
     }
@@ -73,7 +73,6 @@ public class GoodsService {
      */
     private void fillPurchaseFields(final Purchase purchase, final GoodsDto goodsDto) {
         goodsDto.setCount(purchase.getCount());
-        goodsDto.setCoast(purchase.getCoast());
         goodsDto.setPurchaseId(purchase.getId());
     }
 }

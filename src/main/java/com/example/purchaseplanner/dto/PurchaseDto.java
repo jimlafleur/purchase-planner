@@ -1,21 +1,34 @@
 package com.example.purchaseplanner.dto;
 
-import lombok.Builder;
+import com.example.purchaseplanner.dto.base.BaseNamedDto;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Покупка
+ */
 @Getter
 @Setter
-@Builder
-public class PurchaseDto {
-
-    private String name;
+@NoArgsConstructor
+public class PurchaseDto extends BaseNamedDto {
+    /**
+     * Количество
+     */
     private int count;
-    private double coast;
-    private int productId;
-    private int purchaseId;
-    private int listId;
-    private String categoryName;
-    private boolean isBought;
 
+    /**
+     * Стоимость покупки
+     */
+    private int coast;
+
+    /**
+     * Идентификатор списка покупок
+     */
+    private int shoppingListId;
+
+    /**
+     * Продукт, к которому относится покупка
+     */
+    private ProductDto product;
 }

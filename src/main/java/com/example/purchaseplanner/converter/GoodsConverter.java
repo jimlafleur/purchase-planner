@@ -5,13 +5,12 @@ import com.example.purchaseplanner.entity.Product;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GoodsConverter {
-    public GoodsDto convert(Product product) {
-        return GoodsDto.builder()
-                .name(product.getName())
-                .coast(0)
-                .count(0)
-                .productId(product.getId())
-                .build();
+public class GoodsConverter implements BaseConverter<GoodsDto, Product> {
+    @Override
+    public GoodsDto convert(final Product product) {
+        final GoodsDto goodsDto = new GoodsDto();
+        goodsDto.setName(product.getName());
+        goodsDto.setProductId(product.getId());
+        return goodsDto;
     }
 }

@@ -23,7 +23,7 @@ public class InitService {
 
     public void initProducts() {
         try (Stream<String> stream = Files.lines(Paths.get("src\\main\\resources\\defaultProducts.txt"))) {
-            List<String> lines = stream.collect(Collectors.toList());
+            final List<String> lines = stream.collect(Collectors.toList());
             Category currentCategory = null;
             Product currentProduct;
             boolean newCategory = true;
