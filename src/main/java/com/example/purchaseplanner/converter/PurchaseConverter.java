@@ -18,7 +18,7 @@ public class PurchaseConverter implements BaseConverter<PurchaseDto, Purchase> {
         purchaseDto.setCoast(purchase.getCoast());
         purchaseDto.setCount(purchase.getCount());
         purchaseDto.setId(purchase.getProduct().getId());
-        purchaseDto.setProduct(productConverter.convert(purchase.getProduct()));
+        purchaseDto.setCategoryName(purchase.getProduct().getCategory().getName());
         purchaseDto.setShoppingListId(purchase.getShoppingList().getId());
         return purchaseDto;
     }

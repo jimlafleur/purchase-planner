@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class ProductConverter implements BaseConverter<ProductDto, Product> {
-    private final CategoryConverter categoryConverter;
 
     @Override
     public ProductDto convert(final Product product) {
         final ProductDto productDto = new ProductDto();
         productDto.setName(product.getName());
-        productDto.setCategory(categoryConverter.convert(product.getCategory()));
+        productDto.setCategoryId(product.getCategory().getId());
+        productDto.setCategoryName(product.getCategory().getName());
         return productDto;
     }
 }

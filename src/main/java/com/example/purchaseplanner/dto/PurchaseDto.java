@@ -30,5 +30,5 @@ public class PurchaseDto extends BaseNamedDto {
     /**
      * Продукт, к которому относится покупка
      */
-    private ProductDto product;
+    private String categoryName;
 }

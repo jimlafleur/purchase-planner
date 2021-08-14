@@ -37,8 +37,8 @@ public class CategoryController {
 
     @PutMapping("{id}")
     public Category editCategory(@PathVariable("id") Category categoryFromDb,
-                                 @RequestBody Category category) {
-        BeanUtils.copyProperties(category, categoryFromDb, "id");
+                                 @RequestBody CategoryDto categoryDto) {
+        BeanUtils.copyProperties(categoryDto, categoryFromDb, "id");
         return categoryRepository.save(categoryFromDb);
     }
 

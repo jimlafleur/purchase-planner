@@ -1,22 +1,51 @@
 package com.example.purchaseplanner.converter;
 
-import com.example.purchaseplanner.dto.plan.BasePlanDto;
-import com.example.purchaseplanner.dto.plan.SinglePlanDto;
+import com.example.purchaseplanner.dto.plan.CommonPlanDto;
 import com.example.purchaseplanner.entity.plan.BasePlan;
+import com.example.purchaseplanner.entity.plan.SinglePlan;
+import com.example.purchaseplanner.exception.PurchaseException;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
-public class PlanConverter implements BaseConverter<BasePlanDto, BasePlan> {
+public class PlanConverter implements BaseConverter<CommonPlanDto, BasePlan> {
 
     @Override
-    public BasePlanDto convert(final BasePlan basePlan) {
-        final BasePlanDto basePlanDto = new SinglePlanDto();
-//        planDto.setDate(plan.getDate());
-        basePlanDto.setId(basePlan.getId());
-//        planDto.setIsPeriodic(plan.getIsPeriodic());
-//        planDto.setPeriodicity(plan.getPeriodicity());
-        basePlanDto.setShoppingListId(basePlan.getShoppingList().getId());
-        basePlanDto.setShoppingListName(basePlan.getShoppingList().getName());
-        return basePlanDto;
+    public CommonPlanDto convert(final BasePlan basePlan) {
+        final CommonPlanDto commonPlanDto = new CommonPlanDto();
+        commonPlanDto.setId(basePlan.getId());
+        commonPlanDto.setName(basePlan.getName());
+        commonPlanDto.setNearestDate(getNearestDate(basePlan));
+        commonPlanDto.setShoppingListId(basePlan.getShoppingList().getId());
+        commonPlanDto.setShoppingListName(basePlan.getShoppingList().getName());
+        commonPlanDto.setPlanType(basePlan.getPlanType().getDescription());
+        return commonPlanDto;
+    }
+
+    private Date getNearestDate(final BasePlan plan) {
+        switch (plan.getPlanType()) {
+            case SINGLE:
+                return getNearestDateForSinglePlan(plan);
+            case WEEKLY:
+                return getNearestDateForWeeklyPlan(plan);
+            case PERIODIC:
+                return getNearestDateForPeriodicPlan(plan);
+            default:
+                throw new PurchaseException("");
+
+        }
+    }
+
+    private Date getNearestDateForSinglePlan(final BasePlan plan) {
+        return ((SinglePlan) plan).getPlanDate();
+    }
+
+    private Date getNearestDateForWeeklyPlan(final BasePlan plan) {
+        return new Date();
+    }
+
+    private Date getNearestDateForPeriodicPlan(final BasePlan plan) {
+        return new Date();
     }
 }

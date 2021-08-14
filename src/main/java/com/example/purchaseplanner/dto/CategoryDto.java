@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
  * Категория товара
  */
@@ -16,4 +18,6 @@ public class CategoryDto extends BaseNamedDto {
      * Описание категории
      */
     private String description;
+
+    private List<ProductDto> products;
 }

@@ -16,18 +16,22 @@ import java.util.Date;
 @NoArgsConstructor
 public class CommonPlanDto extends BaseNamedDto {
     /**
-     * Общи
+     * Инедтификатор списка покупок
      */
     private int shoppingListId;
 
     /**
-     * Общи
+     * Название списка покупок
      */
     private String shoppingListName;
 
     /**
-     * Общи
+     * Ближайшая дата исполнения плана
      */
-    private Date date;
+    private Date nearestDate;
 
+    /**
+     * Ближайшая дата исполнения плана
+     */
+    private String planType;
 }

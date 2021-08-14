@@ -1,7 +1,11 @@
 package com.example.purchaseplanner.service;
 
 import com.example.purchaseplanner.converter.PlanConverter;
+import com.example.purchaseplanner.converter.PlanDtoConverter;
 import com.example.purchaseplanner.dto.plan.BasePlanDto;
+import com.example.purchaseplanner.dto.plan.CommonPlanDto;
+import com.example.purchaseplanner.entity.ShoppingList;
+import com.example.purchaseplanner.entity.plan.BasePlan;
 import com.example.purchaseplanner.repository.PlanRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,13 +18,20 @@ import java.util.stream.Collectors;
 public class PlanService {
     private final PlanRepository planRepository;
     private final PlanConverter planConverter;
+    private final PlanDtoConverter planDtoConverter;
 
-    public List<BasePlanDto> getAllPlans() {
+    public List<CommonPlanDto> getAllPlans() {
         return planRepository
                 .findAll()
                 .stream()
                 .map(planConverter::convert)
                 .collect(Collectors.toList());
+    }
+
+    public BasePlan addPlan(final BasePlanDto planDto, final ShoppingList shoppingList) {
+        final BasePlan plan = planDtoConverter.convert(planDto);
+        plan.setShoppingList(shoppingList);
+        return planRepository.save(plan);
     }
 
 }

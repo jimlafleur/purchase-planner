@@ -1,11 +1,12 @@
 package com.example.purchaseplanner.controller;
 
 import com.example.purchaseplanner.dto.plan.BasePlanDto;
-import com.example.purchaseplanner.entity.plan.BasePlan;
+import com.example.purchaseplanner.dto.plan.CommonPlanDto;
 import com.example.purchaseplanner.entity.ShoppingList;
-import com.example.purchaseplanner.repository.PlanRepository;
+import com.example.purchaseplanner.entity.plan.BasePlan;
 import com.example.purchaseplanner.service.PlanService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,17 +17,15 @@ import java.util.List;
 public class PlanController {
 
     private final PlanService planService;
-    private final PlanRepository planRepository;
 
     @GetMapping
-    public List<BasePlanDto> getAllPlans() {
+    public List<CommonPlanDto> getAllPlans() {
         return planService.getAllPlans();
     }
 
-    @PostMapping
-    public BasePlan addPlan(@RequestBody BasePlan basePlan,
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public BasePlan addPlan(@RequestBody BasePlanDto plan,
                             @RequestParam("listId") ShoppingList shoppingList) {
-        basePlan.setShoppingList(shoppingList);
-        return planRepository.save(basePlan);
+        return planService.addPlan(plan, shoppingList);
     }
 }

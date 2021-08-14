@@ -15,5 +15,6 @@ public class ProductDto extends BaseNamedDto {
     /**
      * Категория товара, к которой относится продукт
      */
-    private CategoryDto category;
+    private int categoryId;
+    private String categoryName;
 }
