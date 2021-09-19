@@ -1,6 +1,6 @@
 package com.example.purchaseplanner.service;
 
-import com.example.purchaseplanner.converter.GoodsConverter;
+import com.example.purchaseplanner.converter.entity.GoodsConverter;
 import com.example.purchaseplanner.dto.GoodsDto;
 import com.example.purchaseplanner.entity.Purchase;
 import com.example.purchaseplanner.entity.ShoppingList;

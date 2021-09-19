@@ -1,6 +1,6 @@
 package com.example.purchaseplanner.controller;
 
-import com.example.purchaseplanner.converter.ShoppingListConverter;
+import com.example.purchaseplanner.converter.entity.ShoppingListConverter;
 import com.example.purchaseplanner.dto.ShoppingListDto;
 import com.example.purchaseplanner.entity.ShoppingList;
 import com.example.purchaseplanner.repository.ShoppingListRepository;

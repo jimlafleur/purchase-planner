@@ -1,4 +1,4 @@
-package com.example.purchaseplanner.converter;
+package com.example.purchaseplanner.converter.entity;
 
 import com.example.purchaseplanner.dto.PurchaseDto;
 import com.example.purchaseplanner.entity.Purchase;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class PurchaseConverter implements BaseConverter<PurchaseDto, Purchase> {
+public class PurchaseConverter implements BaseEntityConverter<PurchaseDto, Purchase> {
 
     private final ProductConverter productConverter;
 

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,5 +18,5 @@ public class ShoppingListDto extends BaseNamedDto {
     /**
      * Список покупок
      */
-    private List<PurchaseDto> purchaseList;
+    private List<PurchaseDto> purchaseList = new ArrayList<>();
 }

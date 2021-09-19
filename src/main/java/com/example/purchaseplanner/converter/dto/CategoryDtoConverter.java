@@ -1,11 +1,11 @@
-package com.example.purchaseplanner.converter;
+package com.example.purchaseplanner.converter.dto;
 
 import com.example.purchaseplanner.dto.CategoryDto;
 import com.example.purchaseplanner.entity.Category;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CategoryDtoConverter implements BaseConverter<Category, CategoryDto> {
+public class CategoryDtoConverter implements BaseDtoConverter<Category, CategoryDto> {
     @Override
     public Category convert(final CategoryDto categoryDto) {
         final Category category = new Category();
