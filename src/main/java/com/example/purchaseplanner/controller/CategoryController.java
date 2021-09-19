@@ -1,6 +1,6 @@
 package com.example.purchaseplanner.controller;
 
-import com.example.purchaseplanner.converter.CategoryConverter;
+import com.example.purchaseplanner.converter.entity.CategoryConverter;
 import com.example.purchaseplanner.dto.CategoryDto;
 import com.example.purchaseplanner.entity.Category;
 import com.example.purchaseplanner.repository.CategoryRepository;
@@ -31,8 +31,8 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category addCategory(@RequestBody CategoryDto category) {
-        return categoryService.addCategory(category);
+    public CategoryDto addCategory(@RequestBody CategoryDto category) {
+        return categoryConverter.convert(categoryService.addCategory(category));
     }
 
     @PutMapping("{id}")

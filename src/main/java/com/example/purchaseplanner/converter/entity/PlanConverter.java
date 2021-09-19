@@ -1,4 +1,4 @@
-package com.example.purchaseplanner.converter;
+package com.example.purchaseplanner.converter.entity;
 
 import com.example.purchaseplanner.dto.plan.CommonPlanDto;
 import com.example.purchaseplanner.entity.plan.BasePlan;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-public class PlanConverter implements BaseConverter<CommonPlanDto, BasePlan> {
+public class PlanConverter implements BaseEntityConverter<CommonPlanDto, BasePlan> {
 
     @Override
     public CommonPlanDto convert(final BasePlan basePlan) {

@@ -1,7 +1,7 @@
 package com.example.purchaseplanner.service;
 
-import com.example.purchaseplanner.converter.PlanConverter;
-import com.example.purchaseplanner.converter.PlanDtoConverter;
+import com.example.purchaseplanner.converter.entity.PlanConverter;
+import com.example.purchaseplanner.converter.dto.PlanDtoConverter;
 import com.example.purchaseplanner.dto.plan.BasePlanDto;
 import com.example.purchaseplanner.dto.plan.CommonPlanDto;
 import com.example.purchaseplanner.entity.ShoppingList;
@@ -28,10 +28,10 @@ public class PlanService {
                 .collect(Collectors.toList());
     }
 
-    public BasePlan addPlan(final BasePlanDto planDto, final ShoppingList shoppingList) {
+    public CommonPlanDto addPlan(final BasePlanDto planDto, final ShoppingList shoppingList) {
         final BasePlan plan = planDtoConverter.convert(planDto);
         plan.setShoppingList(shoppingList);
-        return planRepository.save(plan);
+        return planConverter.convert(planRepository.save(plan));
     }
 
 }

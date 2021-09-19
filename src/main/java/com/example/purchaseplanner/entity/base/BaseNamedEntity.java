@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @Getter
 @Setter
-public class BaseNamedEntity extends BaseEntity {
+public abstract class BaseNamedEntity extends BaseEntity {
     /**
      * Наименование сущности
      */

@@ -1,4 +1,4 @@
-package com.example.purchaseplanner.converter;
+package com.example.purchaseplanner.converter.entity;
 
 import com.example.purchaseplanner.dto.PurchaseDto;
 import com.example.purchaseplanner.dto.ShoppingListDto;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
-public class ShoppingListConverter implements BaseConverter<ShoppingListDto, ShoppingList> {
+public class ShoppingListConverter implements BaseEntityConverter<ShoppingListDto, ShoppingList> {
 
     private final PurchaseConverter purchaseConverter;
 

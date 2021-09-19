@@ -1,4 +1,4 @@
-package com.example.purchaseplanner.converter;
+package com.example.purchaseplanner.converter.dto;
 
 import com.example.purchaseplanner.dto.plan.BasePlanDto;
 import com.example.purchaseplanner.dto.plan.PeriodicPlanDto;
@@ -19,7 +19,7 @@ import java.util.function.Function;
 import static com.example.purchaseplanner.entity.plan.PlanType.*;
 
 @Component
-public class PlanDtoConverter implements BaseConverter<BasePlan, BasePlanDto> {
+public class PlanDtoConverter implements BaseDtoConverter<BasePlan, BasePlanDto> {
 
     @Override
     public BasePlan convert(final BasePlanDto planDto) {

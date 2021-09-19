@@ -24,7 +24,7 @@ public class PlanController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public BasePlan addPlan(@RequestBody BasePlanDto plan,
+    public CommonPlanDto addPlan(@RequestBody BasePlanDto plan,
                             @RequestParam("listId") ShoppingList shoppingList) {
         return planService.addPlan(plan, shoppingList);
     }

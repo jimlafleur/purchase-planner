@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,5 +30,5 @@ public class Category extends BaseNamedEntity {
      * Список продуктов {@link Product}, которые принадлежат данной категории
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 }

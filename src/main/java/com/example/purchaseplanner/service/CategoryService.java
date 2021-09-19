@@ -1,7 +1,7 @@
 package com.example.purchaseplanner.service;
 
-import com.example.purchaseplanner.converter.CategoryConverter;
-import com.example.purchaseplanner.converter.CategoryDtoConverter;
+import com.example.purchaseplanner.converter.entity.CategoryConverter;
+import com.example.purchaseplanner.converter.dto.CategoryDtoConverter;
 import com.example.purchaseplanner.dto.CategoryDto;
 import com.example.purchaseplanner.entity.Category;
 import com.example.purchaseplanner.repository.CategoryRepository;

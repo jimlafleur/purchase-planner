@@ -1,4 +1,4 @@
-package com.example.purchaseplanner.converter;
+package com.example.purchaseplanner.converter.entity;
 
 import com.example.purchaseplanner.dto.CategoryDto;
 import com.example.purchaseplanner.dto.ProductDto;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
-public class CategoryConverter implements BaseConverter<CategoryDto, Category> {
+public class CategoryConverter implements BaseEntityConverter<CategoryDto, Category> {
     private final ProductConverter productConverter;
 
     @Override
